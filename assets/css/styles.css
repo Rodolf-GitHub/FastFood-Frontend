@@ -1,22 +1,28 @@
 /* custom-styles.css */
 
 :root {
-  --primary-100:#7B4F8E;
-  --primary-200:#563763;
-  --primary-300:#D7C5DF;
-  --accent-100:#B794C0;
-  --accent-200:#895896;
-  --text-100:#FFFFFF;
-  --text-200:#909090;
-  --bg-100:#3B2D4D;
-  --bg-200:#382B49;
-  --bg-300:#4D3B64;
+  --primary-100:#0077C2;
+  --primary-200:#59a5f5;
+  --primary-300:#c8ffff;
+  --accent-100:#00BFFF;
+  --accent-200:#00619a;
+  --text-100:#333333;
+  --text-200:#5c5c5c;
+  --bg-100:#FFFFFF;
+  --bg-200:#f5f5f5;
+  --bg-300:#cccccc;
     
-    
-    
+ 
 }
 
 /* Estilos para el contenedor del menú */
+.almedio{
+  font-style: italic;
+  color: var(--accent-200);
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-weight: bold;
+  text-decoration: underline;
+}
 .nav {
   display: flex;
   justify-content: center;
@@ -25,6 +31,7 @@
   ); /* Cambia el color de fondo según tus preferencias */
   padding: 1rem; /* Añade espaciado alrededor del menú */
   border-radius: 50px;
+ 
 }
 
 /* Estilos para los enlaces de navegación */
@@ -78,14 +85,16 @@
   color: var(--text-200);
   margin-bottom: 2rem;
   color: var(--text-200);
-  background-color: var(--primary-200);
+  background-color: var(--bg-100);
 }
 
 h1 {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 24px;
   margin-bottom: 20px;
-  color: var(--text-100);
-  background-color: var(--primary-100);
+  color: var(--primary-100);
+  font-weight: bold;
+  background-color: var(--bg-100);
 }
 
 form {
@@ -133,13 +142,13 @@ button:hover {
 }
 
 .title {
-  color: var(--text-100);
-
+  margin-top: 10vh;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   text-align: center;
   font-size: 4.5rem;
-  color: var(--text-100);
+  color: var(--primary-100);
   margin-bottom: 2rem;
-  background-color: var(--primary-100);
+  background-color: var(--bg-100);
 }
 
 .balance-info {

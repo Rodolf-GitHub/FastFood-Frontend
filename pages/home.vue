@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <Menu></Menu>
-    <h1 class="title">Bienvenido al restaurante Al Medio</h1>
+    <h1 class="title">Bienvenido al restaurante <span class="almedio">Al Medio</span></h1>
     
     <h1>
       Descubre una experiencia gastronómica única en el corazón de la ciudad.
