@@ -76,9 +76,7 @@
             </button>
 
             <!-- Botón para registrar venta -->
-            <button class="register-sale" @click="registerSale(product)">
-              Editar Producto
-            </button>
+          
           </td>
         </tr>
       </tbody>
