@@ -38,17 +38,19 @@
 
           <label for="productImage">Imagen:</label>
           <input
-            type="text"
+            type="file"
             id="productImage"
-            v-model="productImage"
+            @change="handleImageChange"
+            accept="image/*"
             required
           /><br />
 
-          <button type="add-new-product">Agregar Producto</button>
+          <button type="submit">Agregar Producto</button>
         </form>
       </div>
     </div>
     <!--fin del modal-->
+
     <table v-if="!showModal">
       <thead>
         <tr>
@@ -64,7 +66,7 @@
           <td>{{ product.name }}</td>
           <td>{{ product.price }}</td>
           <td>
-            <img :src="getImageUrl(product.image)" alt="Product Image" />
+            <img :src="getImageUrl(product.image_url)" alt="Product Image" />
           </td>
           <td>{{ product.description }}</td>
           <td>
@@ -75,7 +77,7 @@
 
             <!-- Botón para registrar venta -->
             <button class="register-sale" @click="registerSale(product)">
-              Registrar venta
+              Editar Producto
             </button>
           </td>
         </tr>
@@ -104,7 +106,7 @@ onMounted(async () => {
 });
 
 const getImageUrl = (imageName) => {
-  return import.meta.env.BASE_URL + `assets/images/${imageName}.jpg`;
+  return `${runtimeConfig.public.backendurl}/${imageName}`;
 };
 
 const removeProduct = async (product) => {
@@ -185,7 +187,7 @@ const addProduct = async () => {
     name: productName.value,
     price: productPrice.value,
     description: productDescription.value,
-    image: productImage.value,
+    image_url: productImage.value,
   };
 
   try {
@@ -193,6 +195,7 @@ const addProduct = async () => {
       /(?:(?:^|.*;\s*)token\s*=\s*([^;]*).*$)|^.*$/,
       "$1"
     );
+
     const response = await fetch(
       runtimeConfig.public.backendurl + "/products",
       {
@@ -218,6 +221,35 @@ const addProduct = async () => {
   } catch (error) {
     console.error("Error adding product:", error);
     alert("Error adding product. Please try again.");
+  }
+};
+
+const handleImageChange = async (event) => {
+  const file = event.target.files[0]; // Obtener el archivo de la lista de archivos seleccionados
+
+  const formData = new FormData(); // Crear un objeto FormData para enviar archivos
+  formData.append("file", file); // Agregar el archivo al objeto FormData
+
+  try {
+    const response = await fetch(
+      `${runtimeConfig.public.backendurl}/upload-image`,
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to upload image");
+    }
+
+    const data = await response.json();
+    // Actualizar el valor del campo de imagen con la ruta de la imagen cargada
+    productImage.value =await data.filePath;
+    console.log(productImage.value)
+  } catch (error) {
+    console.error("Error uploading image:", error);
+    alert("Error uploading image. Please try again.");
   }
 };
 </script>

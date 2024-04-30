@@ -12,8 +12,18 @@
         <label for="productDescription">Description:</label>
         <textarea id="productDescription" v-model="productDescription"></textarea><br>
 
-        <label for="productImage">Image:</label>
-        <input type="text" id="productImage" v-model="productImage" required><br>
+        <label
+            for="productImage"
+           
+            >Imagen del producto</label
+          >
+          <input
+            @change="handleFileChange"
+            type="file"
+            id="productImage"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            required
+          /><br>
   
         <button type="submit">OK</button> <!-- Añadido el botón aquí -->
       </form>
@@ -30,19 +40,32 @@ const runtimeConfig = useRuntimeConfig()
         productName: '',
         productPrice: 0,
         productDescription: '',
-        productImage: ''
+        image_url: ''
       };
     },
+    
     methods: {
       async addProduct() {
         const productData = {
           name: this.productName,
           price: this.productPrice,
           description: this.productDescription,
-          image: this.productImage
+          image: this.image_url
         };
   
         try {
+          const fileData = new FormData();
+    if (imgProduct.value) {
+      fileData.append("file", imgProduct.value);
+      const response = await $fetch(
+        `${runtimeConfig.public.backendurl}/upload-image`,
+        {
+          method: "POST",
+          body: fileData,
+        }
+      );
+      this.image_url = response.filePath;
+    }
             const token = document.cookie.replace(
       /(?:(?:^|.*;\s*)token\s*=\s*([^;]*).*$)|^.*$/,
       '$1'
@@ -70,6 +93,11 @@ const runtimeConfig = useRuntimeConfig()
       }
     }
   };
+  const imgEvento = ref(null);
+
+function handleFileChange(event) {
+  imgEvento.value = event.target.files[0];
+}
   </script>
 
   

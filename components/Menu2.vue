@@ -1,6 +1,7 @@
 <template>
   <nav class="nav justify-content-center">
     <a class="nav-link active" href="/productsAdmin" aria-current="page">Products</a>
+    <a class="nav-link active" href="/addUser" aria-current="page">Crear Usuario</a>
     <a class="nav-link active" href="#" @click="logout">Salir</a>
   </nav>
 </template>

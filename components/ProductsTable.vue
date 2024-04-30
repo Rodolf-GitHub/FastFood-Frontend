@@ -15,7 +15,7 @@
           <td>{{ product.name }}</td>
           <td>{{ product.price }}</td>
           <td>
-            <img :src="getImageUrl(product.image)" alt="Product Image" />
+            <img :src="getImageUrl(product.image_url)" alt="Product Image" />
           </td>
           <td>{{ product.description }}</td>
           
@@ -46,8 +46,7 @@ onMounted(async () => {
 });
 
 const getImageUrl = (imageName) => {
-  // Assuming your images are located in the 'assets/images' directory
-  return import.meta.env.BASE_URL + `assets/images/${imageName}.jpg`;
+  return `${runtimeConfig.public.backendurl}/${imageName}`;
 };
 
 const addToCart = (product) => {

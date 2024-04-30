@@ -63,11 +63,6 @@ const runtimeConfig = useRuntimeConfig()
   }
 </script>
 
-<!-- Tu plantilla y estilos permanecen sin cambios -->
-
-
-<!-- Tu plantilla y estilos permanecen sin cambios -->
-
 
 <template>
   <div class="home">
